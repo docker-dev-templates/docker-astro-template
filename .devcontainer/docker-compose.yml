@@ -1,0 +1,28 @@
+version: '3.8' # https://docs.docker.com/compose/compose-file/compose-versioning/#version-3
+
+services:
+  # Frontend Service (Astro App)
+  frontend:
+    image: node:current-alpine
+    user: ${UID}:${UID}
+    working_dir: /app
+    ports: 
+      - ${FRONTEND_EXTERNAL_PORT}:${FRONTEND_INTERNAL_PORT}
+    volumes:
+      - ../${PROJECT_NAME}_frontend:/app
+    environment:
+      NODE_ENV: development
+    command: /bin/sh -c "npm run dev -- --port ${FRONTEND_INTERNAL_PORT} --host"
+    container_name: ${PROJECT_NAME}_frontend
+    networks:
+      - project_network
+
+networks:
+  project_network:
+    name: ${PROJECT_NAME}_network
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.25.0.0/16"
+          gateway: "172.25.0.1"
