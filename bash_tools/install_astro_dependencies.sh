@@ -10,11 +10,11 @@ check_path
 
 source .devcontainer/.env
 
-FOLDER_NAME=${PROJECT_NAME}_frontend
-FRONTEND_PATH=${PWD}/${FOLDER_NAME}
+WEBAPP_FOLDER_NAME=${PROJECT_NAME}
+WEBAPP_PATH=${PWD}/${WEBAPP_FOLDER_NAME}
 
-if [ -d "$FRONTEND_PATH" ]; then
+if [ -d "$WEBAPP_PATH" ]; then
     installDependencies
 else
-	echo -e "\n❌ Advertencia: No existe un directorio llamado $FOLDER_NAME.\n No se instalarán las dependencias de NPM.\n"
+	echo -e "\n❌ Advertencia: No existe un directorio llamado $WEBAPP_FOLDER_NAME.\n No se instalarán las dependencias de NPM.\n"
 fi

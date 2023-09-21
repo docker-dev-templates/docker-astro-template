@@ -20,16 +20,16 @@ function check_path() {
 }
 
 function generateAstroProject() {
-    echo -e "\nSe va a generar un nuevo proyecto Astro en $FRONTEND_PATH\n"
-    docker run --rm -i -v $FRONTEND_PATH:/app node:current-alpine sh -c "cd /app && npm create astro@latest . -- --install --no-git --skip-houston"
+    echo -e "\nSe va a generar un nuevo proyecto Astro en $WEBAPP_PATH\n"
+    docker run --rm -i -v $WEBAPP_PATH:/app node:current-alpine sh -c "cd /app && npm create astro@latest . -- --install --no-git --skip-houston"
     
     echo -e "\n Changing folder owner to $USER \n"
-    sudo chown -R $USER:$USER $FRONTEND_PATH
+    sudo chown -R $USER:$USER $WEBAPP_PATH
 }
 
 function installDependencies() {
-    docker run --rm -v $FRONTEND_PATH:/app node:current-alpine sh -c "cd /app && npm install --loglevel verbose"
+    docker run --rm -v $WEBAPP_PATH:/app node:current-alpine sh -c "cd /app && npm install --loglevel verbose"
 
     echo -e "\n Changing folder owner to $USER \n"
-    sudo chown -R $USER:$USER $FRONTEND_PATH/node_modules
+    sudo chown -R $USER:$USER $WEBAPP_PATH/node_modules
 }
