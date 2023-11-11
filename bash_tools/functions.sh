@@ -21,7 +21,7 @@ function check_path() {
 
 function generateAstroProject() {
     echo -e "\nSe va a generar un nuevo proyecto Astro en $WEBAPP_PATH\n"
-    docker run --rm -i -v $WEBAPP_PATH:/app node:current-alpine sh -c "cd /app && npm create astro@latest . -- --install --no-git --skip-houston"
+    docker run -it --rm -v $WEBAPP_PATH:/app node:current-alpine sh -c "cd /app && npm create astro@latest . -- --install --no-git"
     
     echo -e "\n Changing folder owner to $USER \n"
     sudo chown -R $USER:$USER $WEBAPP_PATH
